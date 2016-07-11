@@ -33,7 +33,19 @@ namespace ForwardArchiver.GUI
             FolderId inbox = WellKnownFolderName.Inbox;
             FolderId sent = WellKnownFolderName.SentItems;
 
-            while (!archive_complete)
+            bool login_success = false;
+
+            try
+            {
+                service.ConvertIds(new AlternateId[] { new AlternateId(IdFormat.HexEntryId, "00", department_email.Text) }, IdFormat.HexEntryId);
+                login_success = true;
+            }
+            catch
+            {
+                feedback_log.Text += "Sign in failed - please check your department email and password are correct.\r\n";
+            }
+
+            while (!archive_complete && login_success)
             {
                 needs_repeat = false;
                 FindItemsResults<Item> unarchived_mail = FindMail(inbox, service);
