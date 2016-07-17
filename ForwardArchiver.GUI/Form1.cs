@@ -221,10 +221,12 @@ namespace ForwardArchiver.GUI
             if (password.Text.Length > 0)
             {
                 archive_mail.Enabled = true;
+                archive_mail.Text = "Archive Mail Now";
             }
             else
             {
                 archive_mail.Enabled = false;
+                archive_mail.Text = "Enter Password Above";
             }
         }
     }
